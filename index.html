@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MasQbom — Precificação de Bolos</title>
+<link rel="icon" href="logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="logo.jpeg" alt="Logo MasQbom" class="brand-logo">
+    <div class="brand-text">
+      <h1>MasQbom</h1>
+      <p>Calculadora de preço — feito com amor</p>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="ingredientes" role="tab" aria-selected="true">Ingredientes</button>
+    <button class="tab-btn" data-tab="potes" role="tab" aria-selected="false">Bolo de Pote</button>
+    <button class="tab-btn" data-tab="caseiro" role="tab" aria-selected="false">Bolo Caseiro</button>
+    <button class="tab-btn" data-tab="aniversario" role="tab" aria-selected="false">Bolo de Aniversário</button>
+    <button class="tab-btn" data-tab="dados" role="tab" aria-selected="false">Meus dados</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== TAB: INGREDIENTES ===================== -->
+  <section id="ingredientes" class="tab-panel active">
+    <div class="panel-head">
+      <h2>Ficha de ingredientes</h2>
+      <p class="hint">Cadastre cada ingrediente do jeito que você compra (ex: pacote de 1kg, caixa de 12 ovos, lata de 395g). Essa lista é usada em todas as receitas — bolo de pote, caseiro e de aniversário.</p>
+    </div>
+
+    <form id="form-ingrediente" class="card form-grid">
+      <div class="field">
+        <label for="ing-nome">Ingrediente</label>
+        <input type="text" id="ing-nome" placeholder="Ex: Leite condensado" required>
+      </div>
+      <div class="field">
+        <label for="ing-unidade">Unidade de medida</label>
+        <select id="ing-unidade">
+          <option value="g">grama (g)</option>
+          <option value="ml">mililitro (ml)</option>
+          <option value="un">unidade (un)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ing-qtd-comprada">Quantidade comprada</label>
+        <input type="number" id="ing-qtd-comprada" min="0" step="0.01" placeholder="Ex: 395" required>
+      </div>
+      <div class="field">
+        <label for="ing-preco-comprado">Preço pago no pacote (R$)</label>
+        <input type="number" id="ing-preco-comprado" min="0" step="0.01" placeholder="Ex: 6,50" required>
+      </div>
+      <div class="field field-btn">
+        <button type="submit" class="btn btn-primary">+ Adicionar ingrediente</button>
+      </div>
+    </form>
+
+    <div class="table-wrap card">
+      <table id="tabela-ingredientes">
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Comprado</th>
+            <th>Preço pago</th>
+            <th>Custo por unidade</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="empty-state" id="ingredientes-vazio">Nenhum ingrediente cadastrado ainda. Comece adicionando o primeiro acima ☝️</p>
+    </div>
+  </section>
+
+  <!-- ===================== TABS DE PRODUTO (geradas via JS) ===================== -->
+  <section id="potes" class="tab-panel" data-categoria="potes"></section>
+  <section id="caseiro" class="tab-panel" data-categoria="caseiro"></section>
+  <section id="aniversario" class="tab-panel" data-categoria="aniversario"></section>
+
+  <!-- ===================== TAB: DADOS ===================== -->
+  <section id="dados" class="tab-panel">
+    <div class="panel-head">
+      <h2>Seus dados</h2>
+      <p class="hint">Tudo é salvo automaticamente neste navegador (localStorage). Para não perder nada — ou para levar seus dados para outro computador/celular — faça o backup abaixo.</p>
+    </div>
+    <div class="card dados-card">
+      <div class="dados-acao">
+        <div>
+          <h3>Exportar backup</h3>
+          <p>Baixa um arquivo .json com ingredientes e todos os bolos (pote, caseiro e aniversário) cadastrados.</p>
+        </div>
+        <button id="btn-exportar" class="btn btn-primary">⬇️ Exportar backup</button>
+      </div>
+      <div class="dados-acao">
+        <div>
+          <h3>Importar backup</h3>
+          <p>Carrega um arquivo .json exportado anteriormente (substitui os dados atuais).</p>
+        </div>
+        <label class="btn btn-ghost file-btn">
+          ⬆️ Importar backup
+          <input type="file" id="input-importar" accept="application/json" hidden>
+        </label>
+      </div>
+      <div class="dados-acao">
+        <div>
+          <h3>Apagar tudo</h3>
+          <p>Remove todos os ingredientes e bolos salvos neste navegador.</p>
+        </div>
+        <button id="btn-apagar" class="btn btn-danger">🗑️ Apagar tudo</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <img src="logo.jpeg" alt="MasQbom" class="footer-logo">
+  <p>MasQbom — Delícias caseiras · (35) 99745-5394</p>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
