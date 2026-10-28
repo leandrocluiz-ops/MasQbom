@@ -9,9 +9,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="locked">
 
 <div class="bg-decor" aria-hidden="true"></div>
+
+<!-- ===================== TELA DE LOGIN ===================== -->
+<section id="tela-login" class="login-wrap" aria-label="Acesso ao sistema">
+  <form id="form-login" class="login-card card" autocomplete="off">
+    <img src="logo.jpeg" alt="Logo MasQbom" class="login-logo">
+    <h2>Acesso restrito</h2>
+    <p class="hint login-hint">Entre com seu usuário e senha para abrir a calculadora.</p>
+
+    <div class="field">
+      <label for="login-usuario">Usuário</label>
+      <input type="text" id="login-usuario" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="login-senha">Senha</label>
+      <input type="password" id="login-senha" autocomplete="current-password" required>
+    </div>
+
+    <p class="login-erro" id="login-erro" role="alert"></p>
+    <button type="submit" class="btn btn-primary login-btn">Entrar</button>
+  </form>
+</section>
 
 <header class="topbar">
   <div class="brand">
@@ -27,6 +48,7 @@
     <button class="tab-btn" data-tab="caseiro" role="tab" aria-selected="false">Bolo Caseiro</button>
     <button class="tab-btn" data-tab="aniversario" role="tab" aria-selected="false">Bolo de Aniversário</button>
     <button class="tab-btn" data-tab="dados" role="tab" aria-selected="false">Meus dados</button>
+    <button class="tab-sair" id="btn-sair" type="button">Sair</button>
   </nav>
 </header>
 

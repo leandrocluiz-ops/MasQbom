@@ -455,3 +455,64 @@ tbody tr:hover{ background: var(--creme-2); }
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* ---------------- Login ---------------- */
+.login-wrap{
+  display: none;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+body.locked .login-wrap{ display: flex; }
+body.locked .topbar,
+body.locked main,
+body.locked .footer{ display: none; }
+
+.login-card{
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.login-card .field{ text-align: left; }
+
+.login-logo{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--rosa);
+  box-shadow: var(--sombra);
+  margin: 0 auto;
+}
+
+.login-hint{ margin: 0 auto; }
+
+.login-erro{
+  min-height: 1.2em;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #C0503F;
+}
+
+.login-btn{ width: 100%; }
+
+.tab-sair{
+  border: none;
+  background: transparent;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #C0503F;
+  cursor: pointer;
+}
+.tab-sair:hover{ background: #FBEAE6; }

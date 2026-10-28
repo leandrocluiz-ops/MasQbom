@@ -570,3 +570,56 @@ function atualizarTudo(){
    ========================================================= */
 Object.keys(CATEGORIAS).forEach(montarPainelCategoria);
 renderIngredientes();
+
+/* =========================================================
+   LOGIN
+   Atenção: como o site é estático (sem servidor), esse login só
+   esconde a tela. Serve para uso pessoal; para proteção de verdade
+   na Hostinger, use também "Pastas protegidas por senha" no hPanel.
+   A senha NÃO fica escrita no código: só o hash SHA-256 dela.
+   ========================================================= */
+const AUTH_KEY = "masqbom_sessao_ok";
+const AUTH_HASH = "8959eb269b2d81292a550f0965bd7a56f1c7feddbbdc2c3dcd4e7fe5723ce45e";
+
+async function gerarHash(usuario, senha){
+  const texto = `masqbom|${usuario.trim().toLowerCase()}|${senha}`;
+  const bytes = new TextEncoder().encode(texto);
+  const buffer = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+function liberarAcesso(){
+  document.body.classList.remove("locked");
+}
+
+function bloquearAcesso(){
+  sessionStorage.removeItem(AUTH_KEY);
+  document.body.classList.add("locked");
+}
+
+document.getElementById("form-login").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const erro = document.getElementById("login-erro");
+  const usuario = document.getElementById("login-usuario").value;
+  const senha = document.getElementById("login-senha").value;
+  erro.textContent = "";
+
+  if(!(window.crypto && crypto.subtle)){
+    erro.textContent = "Seu navegador não suporta o login neste modo. Abra por http://localhost ou pelo site publicado (https).";
+    return;
+  }
+
+  const hash = await gerarHash(usuario, senha);
+  if(hash === AUTH_HASH){
+    sessionStorage.setItem(AUTH_KEY, "1");
+    document.getElementById("form-login").reset();
+    liberarAcesso();
+  } else {
+    erro.textContent = "Usuário ou senha incorretos.";
+    document.getElementById("login-senha").value = "";
+  }
+});
+
+document.getElementById("btn-sair").addEventListener("click", bloquearAcesso);
+
+if(sessionStorage.getItem(AUTH_KEY) === "1") liberarAcesso();

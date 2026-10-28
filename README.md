@@ -22,6 +22,13 @@ README.md    → este guia
 3. Em qualquer aba: monte a receita escolhendo os ingredientes e as quantidades usadas, informe o rendimento, os custos extras e a margem de lucro desejada. O card ao lado mostra o custo por unidade e o preço sugerido na hora.
 4. Clique em **Salvar bolo** para guardar aquele cálculo na lista da categoria.
 
+## Login de acesso
+Ao abrir o site aparece uma tela de login (botão **Sair** no topo). A senha não fica escrita no código, só o hash dela (SHA-256) em `script.js`, na constante `AUTH_HASH`.
+
+> Importante: como o site é estático, esse login só esconde a tela e não é segurança de verdade. Quem souber mexer nas ferramentas do navegador consegue contornar. Para proteger de fato na Hostinger, ative também **Pastas protegidas por senha** (Proteger diretório com senha) no hPanel, na pasta onde o site está.
+
+Para trocar usuário ou senha, gere um novo hash do texto `masqbom|usuario-em-minusculas|senha` (SHA-256) e troque o valor de `AUTH_HASH` em `script.js`.
+
 ---
 
 ## Publicar de graça: GitHub + Hostinger
